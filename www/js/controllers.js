@@ -8,12 +8,9 @@ ProjectsCtrl.$inject = ['$http', '$state'];
 function LoginCtrl($http, $state) {
   var vm = this;
   vm.title = 'Login'
-
-  console.log('login');
 }
 
 function ProjectsCtrl($http, $state) {
   var vm = this;
-
-  console.log('projects');
+  vm.title = 'Projects'
 }
