@@ -32,5 +32,33 @@ function LoginCtrl($http, $state) {
 
 function ProjectsCtrl($http, $state) {
   var vm = this;
-  vm.title = 'Projects'
+  vm.title = 'Projects';
+
+  $http.get('')
+    .then(function(data){
+      vm.projects = data.data.data;
+    });
+
+   vm.handleToggle = function(id, status) {
+    $http.patch('' + id, { active: status })
+      .then(function(data){
+
+        vm.projects = vm.projects.map(function(p){
+          if(p._id == id){
+            return data.data.data;
+          } else {
+            return p;
+          }
+        })
+      }, function(){
+        vm.projects = vm.projects.map(function(p){
+          if(p._id == id){
+            p.active = !p.active;
+            return p;
+          } else {
+            return p;
+          }
+        })
+      });
+  }
 }
