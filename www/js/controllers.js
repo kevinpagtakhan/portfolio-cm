@@ -43,15 +43,18 @@ function ProjectsCtrl($http, $state) {
   var vm = this;
   vm.title = 'Projects';
 
-  $http.get('')
+  if (!localStorage.getItem('token')) {
+    $state.go('login');
+  }
+
+  $http.get('http://localhost:3000/api/projects')
     .then(function(data){
       vm.projects = data.data.data;
     });
 
    vm.handleToggle = function(id, status) {
-    $http.patch('' + id, { active: status })
+    $http.patch('http://localhost:3000/api/projects/' + id + '?token=' + localStorage.getItem('token'), { active: status })
       .then(function(data){
-
         vm.projects = vm.projects.map(function(p){
           if(p._id == id){
             return data.data.data;
@@ -59,7 +62,7 @@ function ProjectsCtrl($http, $state) {
             return p;
           }
         })
-      }, function(){
+      }, function(data){
         vm.projects = vm.projects.map(function(p){
           if(p._id == id){
             p.active = !p.active;
@@ -68,6 +71,12 @@ function ProjectsCtrl($http, $state) {
             return p;
           }
         })
+
+        if(data.status === 403) {
+          alert('Your session has expired');
+          $state.go('login');
+        }
+
       });
   }
 }
