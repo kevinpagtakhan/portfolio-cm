@@ -10,23 +10,32 @@ function LoginCtrl($http, $state) {
   vm.title = 'Login';
   vm.user = {};
 
+  localStorage.removeItem('token');
+
   vm.handleLogin = function() {
-    if(!!vm.user.name && !!vm.user.password){
+    if(!!vm.user.username && !!vm.user.password){
       vm.login(vm.user);
     } else {
-      alert('Username/password is missing')
+      alert('Username/password is missing');
     }
   }
 
   vm.login = function() {
-    // test credentials
-    if(vm.user.name === 'user' && vm.user.password === 'password'){
-      $state.go('projects');
-      vm.user = {};
-    } else {
-      vm.user.password = '';
-      alert('Username/password incorrect');
-    }
+    $http.post('http://localhost:3000/api/auth/login', vm.user)
+      .then(function success(data) {
+        if(data.data.success) {
+          localStorage.setItem('token', data.data.data);
+          vm.user = {};
+          $state.go('projects');
+        } else {
+          localStorage.removeItem('token');
+          alert('Incorrect username/password');
+          vm.user.password = '';
+        }
+      }, function failure(data) {
+        localStorage.removeItem('token');
+        alert('An error has occurred');
+      });
   }
 }
 
