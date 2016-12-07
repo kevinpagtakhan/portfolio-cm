@@ -43,3 +43,35 @@ input[type="color"]{
   border-bottom: 1px solid #ddd;
   margin: 0;
 }
+
+.item-thumbnail-right > img:first-child{
+  max-width: 130px;
+  border-radius: 3px;
+}
+
+.item-thumbnail-right{
+  padding-right: 150px;
+}
+
+.item p:last-child{
+  margin-bottom: 2px;
+}
+
+.tags{
+  font-size: 11px !important;
+  position: absolute;
+  bottom: 0;
+}
+
+.tag{
+  color: #fff;
+  background-color: #bbb;
+  padding: 3px;
+  margin: 2px;
+  border-radius: 2px;
+}
+
+.url{
+  font-size: 12px !important;
+  font-style: italic;
+}
