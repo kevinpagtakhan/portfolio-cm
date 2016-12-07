@@ -52,31 +52,7 @@ function ProjectsCtrl($http, $state) {
       vm.projects = data.data.data;
     });
 
-   vm.handleToggle = function(id, status) {
-    $http.patch('http://localhost:3000/api/projects/' + id + '?token=' + localStorage.getItem('token'), { active: status })
-      .then(function(data){
-        vm.projects = vm.projects.map(function(p){
-          if(p._id == id){
-            return data.data.data;
-          } else {
-            return p;
-          }
-        })
-      }, function(data){
-        vm.projects = vm.projects.map(function(p){
-          if(p._id == id){
-            p.active = !p.active;
-            return p;
-          } else {
-            return p;
-          }
-        })
-
-        if(data.status === 403) {
-          alert('Your session has expired');
-          $state.go('login');
-        }
-
-      });
+  vm.handlePortfolioClick = function(){
+    // TODO: state.go('project')
   }
 }
