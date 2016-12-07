@@ -75,3 +75,7 @@ input[type="color"]{
   font-size: 12px !important;
   font-style: italic;
 }
+
+.project-image{
+  max-width: 100%;
+}

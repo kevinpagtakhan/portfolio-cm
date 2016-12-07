@@ -1,0 +1,15 @@
+<ion-header-bar class="bar-stable">
+  <h1 class="title">Project</h1>
+</ion-header-bar>
+
+<ion-scroll class="has-header" direction="y" style="height: 100%;">
+  <div class="padding">
+    <h2 class="text-center">{{ pc.project.title }}</h2>
+    <p class="text-center">{{ pc.project.website_url }}</p>
+    <img class="project-image" ng-src="{{ pc.project.image_url_thumbnail }}" alt="">
+    <div class="padding-vertical"></div>
+    <p class="text-center">
+      <span class="tag" ng-repeat="t in pc.project.tags">{{ t }}</span>
+    </p>
+  </div>
+</ion-scroll>

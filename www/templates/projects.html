@@ -5,7 +5,7 @@
 <ion-content>
   <ion-list>
     <div class="list">
-      <a class="item item-thumbnail-right" ng-click="pc.handlePortfolioClick()" ng-repeat="p in pc.projects">
+      <a class="item item-thumbnail-right" ng-click="pc.handlePortfolioClick(p._id)" ng-repeat="p in pc.projects">
         <img ng-src="{{ p.image_url_thumbnail }}">
         <h2>{{ p.title }}</h2>
         <p class="url">{{ p.website_url }}</p>

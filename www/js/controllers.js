@@ -1,8 +1,10 @@
 angular.module('starter.controllers', [])
   .controller('LoginCtrl', LoginCtrl)
+  .controller('ProjectCtrl', ProjectCtrl)
   .controller('ProjectsCtrl', ProjectsCtrl);
 
 LoginCtrl.$inject = ['$http', '$state'];
+ProjectCtrl.$inject = ['$http', '$state', '$stateParams'];
 ProjectsCtrl.$inject = ['$http', '$state'];
 
 function LoginCtrl($http, $state) {
@@ -52,7 +54,16 @@ function ProjectsCtrl($http, $state) {
       vm.projects = data.data.data;
     });
 
-  vm.handlePortfolioClick = function(){
-    // TODO: state.go('project')
+  vm.handlePortfolioClick = function(id){
+    $state.go('project', {id: id});
   }
+}
+
+function ProjectCtrl($http, $state, $stateParams) {
+  var vm = this;
+  // console.log($stateParams);
+  $http.get('http://localhost:3000/api/projects/' + $stateParams.id)
+  .then(function(data){
+    vm.project = data.data.data;
+  })
 }

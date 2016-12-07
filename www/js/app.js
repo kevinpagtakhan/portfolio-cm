@@ -35,6 +35,11 @@ function router($stateProvider, $urlRouterProvider) {
       url: '/projects',
       templateUrl: 'templates/projects.html',
       controller: 'ProjectsCtrl as pc'
+    })
+    .state('project', {
+      url: '/projects/:id',
+      templateUrl: 'templates/project.html',
+      controller: 'ProjectCtrl as pc'
     });
 
   $urlRouterProvider.otherwise('/login');
