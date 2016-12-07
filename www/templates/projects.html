@@ -4,10 +4,10 @@
 
 <ion-content>
   <ion-list>
-    <div class="list">
+    <!-- <div class="list">
       <div class="item item-toggle" ng-repeat="p in pc.projects">
         <h2>{{ p.title }}</h2>
-        <!-- <img class="project-preview" ng-src="{{ p.image_url }}"> -->
+        <img class="project-preview" ng-src="{{ p.image_url }}">
         <label class="toggle toggle-assertive">
           <input type="checkbox" ng-model="p.active" ng-change="pc.handleToggle(p._id, p.active)">
           <div class="track">
@@ -15,6 +15,17 @@
           </div>
         </label>
       </div>
+    </div> -->
+
+    <div class="list">
+      <a class="item item-thumbnail-right" ng-click="pc.handlePortfolioClick()" ng-repeat="p in pc.projects">
+        <img ng-src="{{ p.image_url_thumbnail }}">
+        <h2>{{ p.title }}</h2>
+        <p class="url">{{ p.website_url }}</p>
+        <p class="tags">
+          <span class="tag" ng-repeat="t in p.tags">{{ t }}</span>
+        </p>
+      </a>
     </div>
   </ion-list>
 </ion-content>
