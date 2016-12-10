@@ -61,9 +61,42 @@ function ProjectsCtrl($http, $state) {
 
 function ProjectCtrl($http, $state, $stateParams) {
   var vm = this;
-  // console.log($stateParams);
+
   $http.get('http://localhost:3000/api/projects/' + $stateParams.id)
   .then(function(data){
     vm.project = data.data.data;
   })
+
+  vm.goBack = function(){
+    $state.go('projects');
+  }
+
+  vm.handleToggle = function(status) {
+    $http.patch('http://localhost:3000/api/projects/' + vm.project._id + '?token=' + localStorage.getItem('token'), { active: vm.project.active })
+      .then(function(data){
+        vm.project.active = data.data.data.active;
+
+      }, function(data){
+        vm.project.active = !vm.project.active;
+
+        if(data.status === 403) {
+          alert('Your session has expired');
+          $state.go('login');
+        }
+      });
+  }
+
+  vm.handleUpdate = function(){
+    $http.patch('http://localhost:3000/api/projects/' + vm.project._id + '?token=' + localStorage.getItem('token'), vm.project)
+      .then(function(data){
+        vm.project = data.data.data;
+        console.log(vm.project);
+
+      }, function(data){
+        if(data.status === 403) {
+          alert('Your session has expired');
+          $state.go('login');
+        }
+      });
+  }
 }
