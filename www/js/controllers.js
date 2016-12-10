@@ -91,6 +91,7 @@ function ProjectCtrl($http, $state, $stateParams) {
       .then(function(data){
         vm.project = data.data.data;
         console.log(vm.project);
+        $state.go('projects');
 
       }, function(data){
         if(data.status === 403) {
