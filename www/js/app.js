@@ -32,11 +32,13 @@ function router($stateProvider, $urlRouterProvider) {
       controller: 'LoginCtrl as lc'
     })
     .state('projects', {
+      cache: false,
       url: '/projects',
       templateUrl: 'templates/projects.html',
       controller: 'ProjectsCtrl as pc'
     })
     .state('project', {
+      cache: false,
       url: '/projects/:id',
       templateUrl: 'templates/project.html',
       controller: 'ProjectCtrl as pc'
