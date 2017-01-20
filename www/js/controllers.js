@@ -23,7 +23,7 @@ function LoginCtrl($http, $state) {
   }
 
   vm.login = function() {
-    $http.post('http://kevinpagtakhan.com/api/auth/login', vm.user)
+    $http.post('http://www.kevinpagtakhan.com/api/auth/login', vm.user)
       .then(function success(data) {
         if(data.data.success) {
           localStorage.setItem('token', data.data.data);
@@ -49,7 +49,7 @@ function ProjectsCtrl($http, $state) {
     $state.go('login');
   }
 
-  $http.get('http://kevinpagtakhan.com/api/projects')
+  $http.get('http://www.kevinpagtakhan.com/api/projects')
     .then(function(data){
       vm.projects = data.data.data;
     });
@@ -62,7 +62,7 @@ function ProjectsCtrl($http, $state) {
 function ProjectCtrl($http, $state, $stateParams) {
   var vm = this;
 
-  $http.get('http://kevinpagtakhan.com/api/projects/' + $stateParams.id)
+  $http.get('http://www.kevinpagtakhan.com/api/projects/' + $stateParams.id)
   .then(function(data){
     vm.project = data.data.data;
   })
@@ -72,7 +72,7 @@ function ProjectCtrl($http, $state, $stateParams) {
   }
 
   vm.handleToggle = function(status) {
-    $http.patch('http://kevinpagtakhan.com/api/projects/' + vm.project._id + '?token=' + localStorage.getItem('token'), { active: vm.project.active })
+    $http.patch('http://www.kevinpagtakhan.com/api/projects/' + vm.project._id + '?token=' + localStorage.getItem('token'), { active: vm.project.active })
       .then(function(data){
         vm.project.active = data.data.data.active;
 
@@ -87,7 +87,7 @@ function ProjectCtrl($http, $state, $stateParams) {
   }
 
   vm.handleUpdate = function(){
-    $http.patch('http://kevinpagtakhan.com/api/projects/' + vm.project._id + '?token=' + localStorage.getItem('token'), vm.project)
+    $http.patch('http://www.kevinpagtakhan.com/api/projects/' + vm.project._id + '?token=' + localStorage.getItem('token'), vm.project)
       .then(function(data){
         vm.project = data.data.data;
         console.log(vm.project);
